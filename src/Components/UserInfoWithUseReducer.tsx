@@ -11,21 +11,36 @@ const reducer = (currentState, action) => {
     case "addName":
       return {
         ...currentState,
-        name: " next level",
+        name: action.payload,
+      };
+    case "addAge":
+      return {
+        ...currentState,
+        age: action.payload,
+      };
+    case "addHobbies":
+      return {
+        ...currentState,
+        hobbies: [...currentState.hobbies, action.payload],
       };
 
     default:
-      break;
+      currentState;
   }
 };
 
 const UserInfoWithUseReducer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(state);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <input
-        onChange={(e) => dispatch({ type: "addName" })}
+        onChange={(e) => dispatch({ type: "addName", payload: e.target.value })}
         type="text"
         className=""
         name="name"
@@ -33,9 +48,19 @@ const UserInfoWithUseReducer = () => {
         placeholder="Name"
       />
 
-      <input type="text" className="" name="age" id="age" placeholder="Age" />
+      <input
+        onChange={(e) => dispatch({ type: "addAge", payload: e.target.value })}
+        type="text"
+        className=""
+        name="age"
+        id="age"
+        placeholder="Age"
+      />
 
       <input
+        onBlur={(e) =>
+          dispatch({ type: "addHobbies", payload: e.target.value })
+        }
         type="text"
         className=""
         name="hobbies"
