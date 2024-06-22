@@ -1,6 +1,7 @@
 import "./App.css";
 import ComponentWithClass from "./Components/ComponentWithClass";
 import ComponentWithFunction from "./Components/ComponentWithFunction";
+import UserInfoWithUseReducer from "./Components/UserInfoWithUseReducer";
 import UserInfoWithUseState from "./Components/UserInfoWithUseState";
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
     <div>
       <h1>React TS App</h1>
 
-      <UserInfoWithUseState />
+      <UserInfoWithUseReducer />
+      {/* <UserInfoWithUseState /> */}
       {/* function
       <ComponentWithFunction />
       class
