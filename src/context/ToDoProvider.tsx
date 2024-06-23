@@ -9,22 +9,29 @@ type TTodo = {
   isCompleted: boolean;
 };
 
+type TAction = {
+  type: string;
+  payload: TTodo;
+};
 const initialState: TTodo[] = [];
 
-const reducer = (currentState, action) => {
+const reducer = (currentState: TTodo[], action: TAction) => {
   switch (action.type) {
     case "addTodo":
-      return;
+      return [...currentState, action.payload];
 
     default:
-      return initialState;
+      return currentState;
   }
 };
-export const ToDoContext = createContext(undefined);
+export const ToDoContext = createContext<
+  { state: TTodo[]; dispatch: React.Dispatch<TAction> } | undefined
+>(undefined);
 const ToDoProvider = ({ children }: TTodoProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const values = {
-    todoTitle: "This is todo title",
+    state,
+    dispatch,
   };
   return <ToDoContext.Provider value={values}>{children}</ToDoContext.Provider>;
 };
