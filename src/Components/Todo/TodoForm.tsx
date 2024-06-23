@@ -9,7 +9,7 @@ const TodoForm = () => {
     const todo = {
       id: Math.random().toString(36).substring(2, 7),
       title: task,
-      inCompleted: false,
+      isCompleted: false,
     };
     dispatch({ type: "addTodo", payload: todo });
   };
